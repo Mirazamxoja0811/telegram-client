@@ -8,24 +8,31 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from aiogram.exceptions import TelegramAPIError
+from aiogram.exceptions import TelegramAPIError, TelegramNetworkError
 from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN = os.getenv("BOT_TOKEN", "")
-if not TOKEN:
-    raise RuntimeError("BOT_TOKEN topilmadi. .env faylga BOT_TOKEN kiriting.")
 
-group_id_raw = os.getenv("GROUP_ID", "").strip()
-if group_id_raw:
+def get_bot_token() -> str:
+    token = os.getenv("BOT_TOKEN", "").strip()
+    if not token:
+        raise RuntimeError("BOT_TOKEN topilmadi. .env faylga BOT_TOKEN kiriting.")
+    return token
+
+
+def get_group_id() -> int | None:
+    group_id_raw = os.getenv("GROUP_ID", "").strip()
+    if not group_id_raw:
+        return None
     try:
-        GROUP_ID = int(group_id_raw)
+        return int(group_id_raw)
     except ValueError as err:
         raise RuntimeError("GROUP_ID butun son bo'lishi kerak. Masalan: -1001234567890") from err
-else:
-    GROUP_ID = None
 
+
+TOKEN = os.getenv("BOT_TOKEN", "").strip()
+GROUP_ID = get_group_id()
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
@@ -185,7 +192,16 @@ async def process_phone(message: Message, state: FSMContext):
 
 async def main():
     logging.basicConfig(level=logging.INFO)
-    await dp.start_polling(bot)
+    global bot
+
+    token = get_bot_token()
+    bot = Bot(token=token)
+
+    try:
+        await dp.start_polling(bot)
+    except TelegramNetworkError as err:
+        logging.exception("Telegram server bilan bog'lanishda xatolik yuz berdi: %s", err)
+        raise SystemExit(f"Telegramga ulanib bo'lmadi: {err}") from err
 
 
 if __name__ == "__main__":
