@@ -181,10 +181,16 @@ async def process_phone(message: Message, state: FSMContext):
             reply_markup=main_menu_keyboard()
         )
     except TelegramAPIError as err:
+        err_text = str(err)
+        hint = ""
+        if "chat not found" in err_text.lower():
+            hint = "\n\n💡 <b>Tushuntirish:</b> Yangi bot (@CityDriveUzBot) hali taksi guruhiga a'zo yoki admin qilib qo'shilmagan. Guruhga botni admin qilib qo'shing."
+
         await message.answer(
-            f"Xatolik yuz berdi: {err}\n"
+            f"Xatolik yuz berdi: {err_text}{hint}\n\n"
             "Qayta urinib ko'ring yoki /start bosing.",
-            reply_markup=main_menu_keyboard()
+            reply_markup=main_menu_keyboard(),
+            parse_mode="HTML"
         )
 
     await state.clear()
