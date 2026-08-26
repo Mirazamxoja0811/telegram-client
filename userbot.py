@@ -146,11 +146,11 @@ CITIES = [
 KEYWORDS = [
     # Lotincha:
     "kishi", "odam", "bor", "pochta", "poshta", "ketyapman", "ketaman", "ketmoqchiman",
-    "boraman", "bormoqchiman", "beraman", "ming", "som", "so'm", "kerak", "oladigan", "taksi",
+    "boraman", "bormoqchiman", "beraman", "ming", "som", "so'm", "kerak", "oladigan", "taksi", "soat", "soxot",
     # Kirillcha:
     "киши", "одам", "бор", "почта", "пошта", "кетяпман", "кетаман", "кетмокчиман", 
     "кетмоқчиман", "бораман", "бормокчиман", "бормоқчиман", "бераман", "минг", "сум", 
-    "сўм", "керак", "оладиган", "такси"
+    "сўм", "керак", "оладиган", "такси", "соат"
 ]
 
 # Haydovchilar (Taksistlar) uchun taqiqlangan so'zlar (Stop-words - Lotin va Kirill)
@@ -165,10 +165,10 @@ DRIVER_KEYWORDS = [
     "odam kam", "kishi kam", "ta kam", "ga kam", "joy bor", "bosh joy", "bo'sh joy", "joyim bor",
     "odam olaman", "pochta olaman", "pochtalar olaman", "yuk olaman", "chiqamiz", "yuraman", "ketyapmiz",
     "tayyor moshina", "moshina tayyor", "yuradigan moshina", "taksi bor", "pokiza", "kurgavoy", "tarnirovka", "tonirovka",
-    "srochno", "yuramiz", "srochno yuramiz", "olamiz",
+    "yuramiz", "srochno yuramiz", "olamiz",
     "одам кам", "киши кам", "та кам", "га кам", "жой бор", "бош жой", "бўш жой", "жойим бор",
     "одам оламан", "почта оламан", "почталар оламан", "почта оламиз", "почталар оламиз", "yuk olamiz", "юк оламиз", "одам оламиз", "оламиз",
-    "чиқамиз", "юраманг", "юраман", "юрамиз", "кетяпмиз", "срочно", "срочно юрамиз",
+    "чиқамиз", "юраманг", "юраман", "юрамиз", "кетяпмиз", "срочно юрамиз",
     "тайёр мошина", "мошина тайёр", "такси бор", "покиза", "кургавой", "тарнировка", "тонировка"
 ]
 
