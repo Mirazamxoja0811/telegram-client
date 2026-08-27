@@ -32,6 +32,25 @@ Shundan keyin doimiy rejimda:
 docker compose up -d
 ```
 
+### `AUTH_KEY_UNREGISTERED` xatosi
+
+Bu xato Telegram serverdagi userbot session kalitini bekor qilganini bildiradi. Bu guruh ID'si yoki bot tokeni xatosi emas. Eski session faylini o'chirib, userbot'ni interaktiv tarzda qayta login qiling:
+
+```bash
+docker compose stop userbot
+rm -f my_account.session sessions/my_account.session
+docker compose run --rm userbot
+```
+
+Telefon raqami, Telegram kodi va 2FA parolini kiriting. Login muvaffaqiyatli tugagach, yangi session fayli saqlanadi va servisni qayta ishga tushiring:
+
+```bash
+docker compose up -d userbot
+docker compose logs -f userbot
+```
+
+`USERBOT_SESSION_NAME` `.env` faylida boshqa yo'lga o'rnatilgan bo'lsa, o'chiriladigan `.session` fayli ham shu yo'lda bo'ladi. `USERBOT_SESSION_STRING` ishlatilsa, uning qiymatini yangi login'dan olingan session string bilan almashtiring.
+
 Log ko'rish:
 
 ```bash

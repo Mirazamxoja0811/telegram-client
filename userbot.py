@@ -10,6 +10,7 @@ import time
 from collections import OrderedDict
 from dotenv import load_dotenv
 from aiogram import Bot
+from pyrogram.errors import AuthKeyUnregistered
 
 load_dotenv()
 
@@ -339,11 +340,19 @@ async def catch_taxi_messages(client, message):
 
         # 2-usul: Zaxira tariqasida Userbot orqali yuborish
         if not sent:
-            await client.send_message(
-                chat_id=TARGET_GROUP_ID,
-                text=forward_text,
-                parse_mode=enums.ParseMode.HTML
-            )
+            try:
+                await client.send_message(
+                    chat_id=TARGET_GROUP_ID,
+                    text=forward_text,
+                    parse_mode=enums.ParseMode.HTML
+                )
+            except AuthKeyUnregistered:
+                print(
+                    "❌ Userbot sessiyasi Telegram tomonidan bekor qilingan. "
+                    "Serverdagi session faylini o'chirib, qayta login qiling."
+                )
+                await app.stop()
+                return
             print(f"✅ Xabar Userbot orqali guruhga yuborildi: {text[:30]}...")
 
     except Exception as e:
