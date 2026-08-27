@@ -166,7 +166,8 @@ DRIVER_KEYWORDS = [
     "olaman", "оламан", "ovolaman", "оволаман", "ovolamz", "оволамз", "ovolaamiz", "olamiz", "оламиз",
     "yulga chiqaman", "yo'lga chiqaman", "йўлга чиқаман", "йулга чикаман", "chiqaman", "чиқаман",
     "yuryapz", "yuryapmiz", "юрдингиз", "юрсак", "тулдик", "тўлдик", "toldik", "tўldik", "toldoq",
-    "toshkendaman", "тошкендаман",
+    "toshkendaman", "тошкендаман", "pochtalar bolsa ovolamz", "pochtalar bo'lsa ovolamiz", "pochta bolsa ovolamz",
+    "почталар бўлса оволамиз", "почталар болса оволамз", "почта болса оволамз",
     
     # Haydovchi iboralari va bo'sh joylar (Lotin va Kirill)
     "odam kam", "kishi kam", "ta kam", "ga kam", "joy bor", "bosh joy", "bo'sh joy", "joyim bor",
@@ -196,8 +197,8 @@ DRIVER_REGEXES = [
     r"\b(га|та)?\s*\d+\s*кам\b",
     r"\bсрочно\s+юрамиз\b",
     r"\bsrochno\s+yuramiz\b",
-    r"\bпочта(лар)?\s+(оламиз|оволамиз|оламан|оволаман)\b",
-    r"\bpochta(lar)?\s+(olamiz|ovolamiz|olaman|ovolaman)\b",
+    r"\bпочта(лар)?\s*(бўлса|булса|болса)?\s*(овола?м[из|з]|ола?м[из|z]|оламан|оволаман|оволамз)\b",
+    r"\bpochta(lar)?\s*(bo'lsa|bolsa)?\s*(ovola?m[iz|z]|ola?m[iz|z]|olaman|ovolaman|ovolamz)\b",
     r"\b(олди|oldi)\s*(бўш|буш|бош|bosh|bush|bsh)\b",
     r"\b\d+\s*(та|ta)?\s*(одам|odam|kishi|киши)\s*(керак|kerak)\b",
     r"\b(йўлга|йулга|yo'?lga)\s+(чиқаман|рикаман|чикамиз|chiqaman)\b",
@@ -210,6 +211,19 @@ def is_driver_message(text: str) -> bool:
         return False
     text_lower = text.lower()
     
+    # Agar mijoz "bo'lsin" (masalan: "oldi bo'sh bo'lsin") yoki "beraman" (100 ming beraman) desa -> bu mijoz istagi!
+    is_customer_wishes = any(w in text_lower for w in ["bo'lsin", "bolsin", "боьлсин", "болсин", "beraman", "бераман"])
+    if is_customer_wishes:
+        # Faqat aniq mashina rusumi yoki haydovchi fe'llari (toldik, yulga chiqaman) bo'lsagina rad etiladi
+        explicit_driver_markers = [
+            "cobalt", "gentra", "nexia", "spark", "damas", "malibu", "tracker", "lasetti", "lacetti", "labo",
+            "кобальт", "жентра", "нексия", "спарк", "дамас", "малибу", "трекер", "ласетти",
+            "toldik", "тўлдик", "тулдик", "yulga chiqaman", "йўлга чиқаман", "йулga чикаман", "ovola"
+        ]
+        if any(m in text_lower for m in explicit_driver_markers):
+            return True
+        return False
+
     # Harflar orasiga probel qo'yilgan matnlarni normalizatsiya qilish (masalan: "К О Б Л Т" -> "КОБЛТ")
     text_normalized = re.sub(r'(?<=\b\w)\s+(?=\w\b)', '', text_lower)
 
