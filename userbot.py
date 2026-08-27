@@ -153,7 +153,7 @@ KEYWORDS = [
     "сўм", "керак", "оладиган", "такси", "соат"
 ]
 
-# Haydovchilar (Taksistlar) uchun taqiqlangan so'zlar (Stop-words - Lotin va Kirill)
+# Haydovchilar (Taksistlar) va Reklama (Mehmonxona/Spam) uchun taqiqlangan so'zlar (Stop-words - Lotin va Kirill)
 DRIVER_KEYWORDS = [
     # Mashina nomlari va modellar (Lotin va Kirill)
     "moshina", "mashina", "cobalt", "kobilt", "kőbilt", "koblt", "kobl", "gentra", "jentra",
@@ -161,15 +161,30 @@ DRIVER_KEYWORDS = [
     "labo", "byd", "chazor", "avto", "auto", "taksidaman", "taksist", "haydovchiman",
     "мошина", "машина", "кобальт", "кобильт", "коблт", "кобл", "жентра", "джентра", "нексия", "спарк",
     "дамас", "малибу", "трекер", "ласетти", "лабо", "таксидаман", "таксист", "хайдовчиман",
+    
+    # Haydovchi fe'llari va holatlari (Lotin va Kirill)
+    "olaman", "оламан", "ovolaman", "оволаман", "ovolamz", "оволамз", "ovolaamiz", "olamiz", "оламиз",
+    "yulga chiqaman", "yo'lga chiqaman", "йўлга чиқаман", "йулга чикаман", "chiqaman", "чиқаман",
+    "yuryapz", "yuryapmiz", "юрдингиз", "юрсак", "тулдик", "тўлдик", "toldik", "tўldik", "toldoq",
+    "toshkendaman", "тошкендаман",
+    
     # Haydovchi iboralari va bo'sh joylar (Lotin va Kirill)
     "odam kam", "kishi kam", "ta kam", "ga kam", "joy bor", "bosh joy", "bo'sh joy", "joyim bor",
     "odam olaman", "pochta olaman", "pochtalar olaman", "yuk olaman", "chiqamiz", "yuraman", "ketyapmiz",
     "tayyor moshina", "moshina tayyor", "yuradigan moshina", "taksi bor", "pokiza", "kurgavoy", "tarnirovka", "tonirovka",
-    "yuramiz", "srochno yuramiz", "olamiz",
+    "yuramiz", "srochno yuramiz",
     "одам кам", "киши кам", "та кам", "га кам", "жой бор", "бош жой", "бўш жой", "жойим бор",
-    "одам оламан", "почта оламан", "почталар оламан", "почта оламиз", "почталар оламиз", "yuk olamiz", "юк оламиз", "одам оламиз", "оламиз",
+    "одам оламан", "почта оламан", "почталар оламан", "почта оламиз", "почталар оламиз", "yuk olamiz", "юк оламиз", "одам оламиз",
     "чиқамиз", "юраманг", "юраман", "юрамиз", "кетяпмиз", "срочно юрамиз",
-    "тайёр мошина", "мошина тайёр", "такси бор", "покиза", "кургавой", "тарнировка", "тонировка"
+    "тайёр мошина", "мошина тайёр", "такси бор", "покиза", "кургавой", "тарнировка", "тонировка",
+    
+    # Mashina o'rindiqlari va bagaj (Lotin va Kirill)
+    "tom bagaj", "том багаж", "bagaj", "багаж",
+    "oldi bo'sh", "oldi bush", "oldi bosh", "олди бўш", "олди буш", "олди бош", "oldi bsh",
+    "odam kerak", "одам керак", "kishi kerak", "киши керак", "ta odam kerak", "та одам керак",
+    
+    # Mehmonxona va boshqa spam so'zlar
+    "mehmonxona", "мехмонхона", "hotel", "hostel", "хостел", "bron", "брон", "xonalar", "хоналар", "hamyonbop", "ҳамёнбоп"
 ]
 
 # Qo'shimcha haydovchi iboralarining muntazam ifodalari (Regex)
@@ -181,8 +196,12 @@ DRIVER_REGEXES = [
     r"\b(га|та)?\s*\d+\s*кам\b",
     r"\bсрочно\s+юрамиз\b",
     r"\bsrochno\s+yuramiz\b",
-    r"\bпочта(лар)?\s+оламиз\b",
-    r"\bpochta(lar)?\s+olamiz\b",
+    r"\bпочта(лар)?\s+(оламиз|оволамиз|оламан|оволаман)\b",
+    r"\bpochta(lar)?\s+(olamiz|ovolamiz|olaman|ovolaman)\b",
+    r"\b(олди|oldi)\s*(бўш|буш|бош|bosh|bush|bsh)\b",
+    r"\b\d+\s*(та|ta)?\s*(одам|odam|kishi|киши)\s*(керак|kerak)\b",
+    r"\b(йўлга|йулга|yo'?lga)\s+(чиқаман|рикаман|чикамиз|chiqaman)\b",
+    r"\b(мехмонхона|mehmonxona|hostel|хостел)\b"
 ]
 
 
