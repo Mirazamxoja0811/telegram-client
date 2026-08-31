@@ -202,7 +202,7 @@ DRIVER_REGEXES = [
     r"\b\d+[\s\.\,]*га[\s\.\,]*кам\b",
     r"\b\d+[\s\.\,]*та[\s\.\,]*кам\b",
     r"\b\d+[\s\.\,]*кам(дамиз)?\b",
-    r"\b(га|та)?\s*\d+\s*кам(дамиз)?\b",
+    r"\b(га|ta)?\s*\d+\s*кам(дамиз)?\b",
     r"\bсрочно\s+юрамиз\b",
     r"\bsrochno\s+yuramiz\b",
     r"\bпочта(лар)?\s*(бўлса|булса|болса)?\s*(овола?м[из|з]|ола?м[из|z]|оламан|оволаман|оволамз)\b",
@@ -220,10 +220,10 @@ def is_driver_message(text: str) -> bool:
         return False
     text_lower = text.lower()
     
-    # Agar mijoz "bo'lsin" (masalan: "oldi bo'sh bo'lsin") yoki "beraman" (100 ming beraman) desa -> bu mijoz istagi!
-    is_customer_wishes = any(w in text_lower for w in ["bo'lsin", "bolsin", "боьлсин", "болсин", "beraman", "бераман"])
+    # Agar mijoz "bo'lsin" (masalan: "oldi bo'sh bo'lsin"), "kerak" (moshina kerak), yoki "beraman" (100 ming beraman) desa -> bu mijoz istagi!
+    is_customer_wishes = any(w in text_lower for w in ["bo'lsin", "bolsin", "бўлсин", "булсин", "боьлсин", "болсин", "beraman", "бераман", "kerak", "керак"])
     if is_customer_wishes:
-        # Faqat aniq mashina rusumi yoki haydovchi fe'llari (toldik, yulga chiqaman) bo'lsagina rad etiladi
+        # Faqat aniq mashina rusumi yoki haydovchi fe'llari (toldik, yulga chiqaman, olib ketamiz, kamdamiz) bo'lsagina rad etiladi
         explicit_driver_markers = [
             "cobalt", "gentra", "nexia", "spark", "damas", "malibu", "tracker", "lasetti", "lacetti", "labo", "sobalt", "sabalt",
             "кобальт", "жентра", "нексия", "спарк", "дамас", "малибу", "трекер", "ласетти", "собальт", "собалт",
