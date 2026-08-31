@@ -154,26 +154,32 @@ KEYWORDS = [
     "сўм", "керак", "оладиган", "такси", "соат"
 ]
 
-# Haydovchilar (Taksistlar) va Reklama (Mehmonxona/Spam) uchun taqiqlangan so'zlar (Stop-words - Lotin va Kirill)
+# Haydovchilar (Taksistlar) va Reklama (Mehmonxona/Asfalt/Spam) uchun taqiqlangan so'zlar (Stop-words - Lotin va Kirill)
 DRIVER_KEYWORDS = [
-    # Mashina nomlari va modellar (Lotin va Kirill)
-    "moshina", "mashina", "cobalt", "kobilt", "kőbilt", "koblt", "kobl", "gentra", "jentra",
+    # Mashina nomlari va modellar (Lotin va Kirill va Xatolar)
+    "moshina", "mashina", "cobalt", "kobilt", "kőbilt", "koblt", "kobl", "sobalt", "sabalt", "gentra", "jentra",
     "nexia", "neksiya", "spark", "damas", "malibu", "tracker", "lasetti", "lacetti",
     "labo", "byd", "chazor", "avto", "auto", "taksidaman", "taksist", "haydovchiman",
-    "мошина", "машина", "кобальт", "кобильт", "коблт", "кобл", "жентра", "джентра", "нексия", "спарк",
+    "мошина", "машина", "кобальт", "кобильт", "коблт", "кобл", "собальт", "собалт", "сабалт", "жентра", "джентра", "нексия", "спарк",
     "дамас", "малибу", "трекер", "ласетти", "лабо", "таксидаман", "таксист", "хайдовчиман",
     
     # Haydovchi fe'llari va holatlari (Lotin va Kirill)
     "olaman", "оламан", "ovolaman", "оволаман", "ovolamz", "оволамз", "ovolaamiz", "olamiz", "оламиз",
+    "olib ketamiz", "олиб кетамиз", "олиб кэтамиз", "olib ketamz", "olib ketyapmiz", "олиб кетяпмиз", "olib ketaman", "олиб кетаман",
     "yulga chiqaman", "yo'lga chiqaman", "йўлга чиқаман", "йулга чикаман", "chiqaman", "чиқаман",
+    "yolga chiqamiz", "йўлга чиқамиз", "йолга чикамиз", "йулга чикамиз", "yolga chiqamz", "йолга чикамаз",
     "yuryapz", "yuryapmiz", "юрдингиз", "юрсак", "тулдик", "тўлдик", "toldik", "tўldik", "toldoq",
     "toshkendaman", "тошкендаман", "pochtalar bolsa ovolamz", "pochtalar bo'lsa ovolamiz", "pochta bolsa ovolamz",
     "почталар бўлса оволамиз", "почталар болса оволамз", "почта болса оволамз",
     
     # Haydovchi iboralari va bo'sh joylar (Lotin va Kirill)
-    "odam kam", "kishi kam", "ta kam", "ga kam", "joy bor", "bosh joy", "bo'sh joy", "joyim bor",
+    "odam kam", "kishi kam", "ta kam", "ga kam", "kamdamiz", "камдамиз", "kamdaiz", "камдаиз", "kamda", "камда",
+    "joy bor", "bosh joy", "bo'sh joy", "joyim bor", "pustoy", "пустой", "kam pustoy", "кам пустой",
     "odam olaman", "pochta olaman", "pochtalar olaman", "yuk olaman", "chiqamiz", "yuraman", "ketyapmiz",
     "tayyor moshina", "moshina tayyor", "yuradigan moshina", "taksi bor", "pokiza", "kurgavoy", "tarnirovka", "tonirovka",
+    "salon pokiza", "салон покиза", "salon", "салон", "konditsioner", "кондиционер", "click bor", "click ham bor", "клик бор", "клик ҳам бор",
+    "klient vaqtiga", "klent vaqtiga", "клиент вақтига", "клент вактига", "vaqtiga yuramiz", "вактига юрамиз",
+    "aytinglar", "айтинглар", "ayting", "айтинг",
     "yuramiz", "srochno yuramiz",
     "одам кам", "киши кам", "та кам", "га кам", "жой бор", "бош жой", "бўш жой", "жойим бор",
     "одам оламан", "почта оламан", "почталар оламан", "почта оламиз", "почталар оламиз", "yuk olamiz", "юк оламиз", "одам оламиз",
@@ -185,8 +191,9 @@ DRIVER_KEYWORDS = [
     "oldi bo'sh", "oldi bush", "oldi bosh", "олди бўш", "олди буш", "олди бош", "oldi bsh",
     "odam kerak", "одам керак", "kishi kerak", "киши керак", "ta odam kerak", "та одам керак",
     
-    # Mehmonxona va boshqa spam so'zlar
-    "mehmonxona", "мехмонхона", "hotel", "hostel", "хостел", "bron", "брон", "xonalar", "хоналар", "hamyonbop", "ҳамёнбоп"
+    # Mehmonxona, Asfalt xizmati va boshqa reklama/spam so'zlar
+    "mehmonxona", "мехмонхона", "hotel", "hostel", "хостел", "bron", "брон", "xonalar", "хоналар", "hamyonbop", "ҳамёнбоп",
+    "asfalt", "асфальт", "асфальт босиш", "kv/m", "кв/м", "кв.м", "sotiladi", "сотилади", "ijara", "ижара", "arenda", "аренда", "remont", "ремонт", "vakansiya", "вакансия"
 ]
 
 # Qo'shimcha haydovchi iboralarining muntazam ifodalari (Regex)
@@ -194,16 +201,17 @@ DRIVER_REGEXES = [
     r"\b\d+[\s\.\,]*га[\s\.\,]*\d+[\s\.\,]*кам\b",
     r"\b\d+[\s\.\,]*га[\s\.\,]*кам\b",
     r"\b\d+[\s\.\,]*та[\s\.\,]*кам\b",
-    r"\b\d+[\s\.\,]*кам\b",
-    r"\b(га|та)?\s*\d+\s*кам\b",
+    r"\b\d+[\s\.\,]*кам(дамиз)?\b",
+    r"\b(га|та)?\s*\d+\s*кам(дамиз)?\b",
     r"\bсрочно\s+юрамиз\b",
     r"\bsrochno\s+yuramiz\b",
     r"\bпочта(лар)?\s*(бўлса|булса|болса)?\s*(овола?м[из|з]|ола?м[из|z]|оламан|оволаман|оволамз)\b",
     r"\bpochta(lar)?\s*(bo'lsa|bolsa)?\s*(ovola?m[iz|z]|ola?m[iz|z]|olaman|ovolaman|ovolamz)\b",
     r"\b(олди|oldi)\s*(бўш|буш|бош|bosh|bush|bsh)\b",
     r"\b\d+\s*(та|ta)?\s*(одам|odam|kishi|киши)\s*(керак|kerak)\b",
-    r"\b(йўлга|йулга|yo'?lga)\s+(чиқаман|рикаман|чикамиз|chiqaman)\b",
-    r"\b(мехмонхона|mehmonxona|hostel|хостел)\b"
+    r"\b(йўлга|йулга|yo'?lga|йолга)\s+(чиқаман|рикаман|чикамиз|chiqaman|chiqamiz)\b",
+    r"\b(олиб|olib)\s+(кетамиз|кэтамиз|ketamiz|ketyapmiz|ketaman)\b",
+    r"\b(мехмонхона|mehmonxona|hostel|хостел|асфальт|asfalt)\b"
 ]
 
 
@@ -217,9 +225,10 @@ def is_driver_message(text: str) -> bool:
     if is_customer_wishes:
         # Faqat aniq mashina rusumi yoki haydovchi fe'llari (toldik, yulga chiqaman) bo'lsagina rad etiladi
         explicit_driver_markers = [
-            "cobalt", "gentra", "nexia", "spark", "damas", "malibu", "tracker", "lasetti", "lacetti", "labo",
-            "кобальт", "жентра", "нексия", "спарк", "дамас", "малибу", "трекер", "ласетти",
-            "toldik", "тўлдик", "тулдик", "yulga chiqaman", "йўлга чиқаман", "йулga чикаман", "ovola"
+            "cobalt", "gentra", "nexia", "spark", "damas", "malibu", "tracker", "lasetti", "lacetti", "labo", "sobalt", "sabalt",
+            "кобальт", "жентра", "нексия", "спарк", "дамас", "малибу", "трекер", "ласетти", "собальт", "собалт",
+            "toldik", "тўлдик", "тулдик", "yulga chiqaman", "йўлга чиқаман", "йулga чикаман", "yolga chiqamiz", "йолга чикамиз",
+            "ovola", "olib ket", "олиб кет", "олиб кэт", "asfalt", "асфальт", "kamdamiz", "камдамиз"
         ]
         if any(m in text_lower for m in explicit_driver_markers):
             return True
